@@ -97,7 +97,8 @@ $(".candle").click(()=>{
 
 $('.wrapper-envelope, .lid, .envelope, .letter').click(function(e){
     gift_appear_status = true;
-    e.preventDefault()
+    clearTimeout(myTimeout);
+    //e.preventDefault()
     envelope_click+=1
     $(".background-black").slideDown()
     $("#notebook-paper").slideDown()
