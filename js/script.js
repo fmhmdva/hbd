@@ -5,6 +5,8 @@ var envelope_click = 0;
 let gift_appear_status = false;
 let violin_appear_status = false;
 var myTimeout
+
+const music = new Audio("music/music.m4a")
 showPopUp(700)
 // 
 
@@ -125,6 +127,7 @@ $("#lid-gift, #box ").click(function(){
             setTimeout(()=>{
                 $(".violin").addClass('violin-tranform-safari')
                 $(".violin").slideDown(1500)
+                music.play();
             },500)
         }
         else{
@@ -132,6 +135,7 @@ $("#lid-gift, #box ").click(function(){
             setTimeout(()=>{
                 $(".violin").addClass('violin-tranform')
                 $(".violin").slideDown(1500)
+                music.play();
             },500)
         }
     },1000)
