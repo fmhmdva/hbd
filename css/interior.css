@@ -3185,7 +3185,8 @@ html {
 .box {
   display: none;
   position: absolute;
-  left: 10%;
+  bottom: 0;
+  left: 0%;
   bottom: 10%;
   width: 400px;
   height: 500px;
