@@ -52,30 +52,32 @@ $("#close_dialogue").click(function(){
     closePopUp()
 })
 
-$('#cake').click(function(){
-    
-    
-    if(!$(this).hasClass('piece') && cake_click==0){
+$('#cake').click(function(e){
+    if ( !$(e.target).hasClass("candle") && !$(e.target).hasClass("flame")){
+        if(!$(this).hasClass('piece') && cake_click==0){
         
     
-        $(this).addClass('piece')
-        $('.one_piece').removeClass('d-none')
-        $('.piece_plate').removeClass('d-none')
-        cake_click+=1
+            $(this).addClass('piece')
+            $('.one_piece').removeClass('d-none')
+            $('.piece_plate').removeClass('d-none')
+            cake_click+=1
+            
+            if(envelope_click==0){
+                showPopUp(1500,"Stolun qarşısındakı məktuba oxşayır.<br> Bəlkə içində maraqlı nəsə yazılıb?<br> Aç və birlikdə oxuyaq ")
+                return
+            }
+    
+        }
+        else if($(this).hasClass('piece') && cake_click>0){
+            
         
-        if(envelope_click==0){
-            showPopUp(1500,"Stolun qarşısındakı məktuba oxşayır.<br> Bəlkə içində maraqlı nəsə yazılıb?<br> Aç və birlikdə oxuyaq ")
+            clearTimeout(myTimeout);
+            showPopUp(200,"Hey axı sənə çoxlu şirniyat yemək olmaz.<br> Bu qədər bəsdir.")
             return
         }
-
     }
-    else if($(this).hasClass('piece') && cake_click>0){
-        
     
-        clearTimeout(myTimeout);
-        showPopUp(200,"Hey axı sənə çoxlu şirniyat yemək olmaz.<br> Bu qədər bəsdir.")
-        return
-    }
+    
 })
 
 $('body').on('click', '.chandelier', function() {
@@ -88,6 +90,10 @@ $('body').on('click', '.chandelier', function() {
     
   
 });
+
+$(".candle").click(()=>{
+    $(".flame").css({"display":"none"})
+})
 
 $('.wrapper-envelope, .lid, .envelope, .letter').click(function(e){
     gift_appear_status = true;
