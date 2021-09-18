@@ -437,14 +437,6 @@ $vanilla: #f0e4d0;
 $chocolate: #553c13;
 
 
-body {
-    background-color: white;
-    background-image: url('../images/table.png');
-    background-repeat: no-repeat;
-    background-position: center; 
-    height: 100vh;
-}
-
 .d-none{
     display: none;
 }
@@ -999,7 +991,7 @@ $dim: 150px;
   transform: translate3d(-50%, 0, 0);
   width: $dim;
   //padding-top: 45/2vmin;
-  perspective: 2000px;
+  perspective: 5000px;
   transform-style: preserve-3d;
   transform-origin: 50% 0%;
 }
@@ -1009,10 +1001,14 @@ $dim: 150px;
   //perspective: 1000px;
   //transform: translateZ(($dim / -2)) rotateY(-75deg);
   transform-style: preserve-3d;
+  // position: relative;
+  // z-index: 2;
 }
 #lid-gift {
   transform-style: preserve-3d;
   transform: translate3d(-1/2vmin, 0, 0);
+  position: absolute;
+  z-index: 2;
   
   .face {
     width: ($dim + 2);
@@ -1020,31 +1016,45 @@ $dim: 150px;
     background: lighten($wrap,1);
     
     &.top {
+      z-index:234;
+      position:absolute;
       height: ($dim + 2);
     }
     &.front {
+      z-index:234;
+      position:absolute;
       transform: rotateY(0deg) translateZ((45px));
       box-shadow: 0px 3px 2px rgba(0,0,0,.1);
     }
     &.back {
+      z-index:234;
+      position:absolute;
       transform: rotateX(180deg) translateZ((45px));
       box-shadow: 0px -3px 2px rgba(0,0,0,.1);
     }
     &.left {
+      z-index:234;
+      position:absolute;
       width: 90px;
       transform: rotateY(-90deg) translateZ((45px));
       box-shadow: 0px 3px 2px rgba(0,0,0,.1);
     }
     &.right {
+      z-index:234;
+      position:absolute;
       width: 90px;
       transform: rotateY(90deg) translateZ((45px));
       box-shadow: 0px 3px 2px rgba(0,0,0,.1);
     }
     &.top {
+      z-index:234;
+      position:absolute;
       height: 90px;
       transform: rotateX(90deg) translateZ((45px));
     }
     &.bottom {
+      z-index:234;
+      position:absolute;
       transform: rotateX(-90deg) translateZ((45px));
     }
   }
@@ -1062,23 +1072,35 @@ $dim: 150px;
   
   
   &.front {
+    z-index:234;
+    position:absolute;
     transform: rotateY(0deg) translateZ(44px);
   }
   &.back {
+    z-index:234;
+    position:absolute;
     transform: rotateX(180deg) translateZ(45px);
   }
   &.left {
+    z-index:234;
+    position:absolute;
     width: 90px!important;
     transform: rotateY(-90deg) translateZ(44px);
   }
   &.right {
+    z-index:234;
+    position:absolute;
     width: 90px!important;
     transform: rotateY(90deg) translateZ(100px);
   }
   &.top {
+    z-index:234;
+    position:absolute;
     transform: rotateX(90deg) translateZ(44px);
   }
   &.bottom {
+    z-index:234;
+    position:absolute;
     height: 90px;
     transform: rotateX(-90deg) translateZ(75px);
   }
@@ -1492,9 +1514,15 @@ $dim: 150px;
   }
 }
 
+@media screen and (max-width: 850px) {
+  .box{
+    transform: scale(0.7) translate3d(-10px,28px,0);
+  }
+}
+
 @media screen and (max-width: 700px) {
   .box {
-   transform: scale(0.5);
+   transform: scale(0.5) translate3d(-90px,28px,0);
   }
 }
 
@@ -1510,9 +1538,231 @@ $dim: 150px;
    transform: scale(0.3);
   }
 }
-  
 
 
+body {
+  --outer-circle: transparent;
+  --middle-circle: transparent;
+  --inner-circle: transparent;
+  // background: radial-gradient(
+  //   circle,
+  //   var(--inner-circle) 35%,
+  //   var(--middle-circle) 35%,
+  //   var(--middle-circle) 70%,
+  //   var(--outer-circle) 35%
+  // );
+}
 
-  
-  
+.violin,
+.violin::before,
+.violin::after {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.violin {
+  position: absolute;
+  display: none;
+  width: 248px;
+  height: 470px;
+  background-repeat: no-repeat;
+  /* colors */
+  --tail-piece: #2e3038;
+  --violin-body: #c54754;
+  --violin-body-outline: #ae3e4b;
+  --violin-strings-gray: #b5b5b7;
+  --scroll-light-red: #b13942;
+  --scroll-shadow-red: #912f37;
+  --tuning-peg-detail: #2c272b;
+  --tuning-peg-circle: #4b474a;
+  --tuning-peg-branch: #75595c;
+  --fingerboard: #484447;
+  --bridge: #fecbbe;
+  --bridge-shadow: #b4404b;
+  --fine-tuner-light: #5a5a5c;
+  --fine-tuner-dark: #252526;
+  /* create the violin side shapes */
+  --edge-left: radial-gradient(
+      ellipse,
+      var(--inner-circle) 17px,
+      transparent 17px
+    ),
+    radial-gradient(circle, var(--inner-circle) 21px, transparent 21px),
+    linear-gradient(var(--violin-body) 35px, transparent 35px);
+  --edge-right: radial-gradient(
+      ellipse,
+      var(--inner-circle) 17px,
+      transparent 17px
+    ),
+    radial-gradient(circle, var(--inner-circle) 20px, transparent 20px),
+    linear-gradient(var(--violin-body) 35px, transparent 35px);
+  /* violin body */
+  --violin-body-main: radial-gradient(
+      circle,
+      var(--violin-body) 63px,
+      transparent 63px
+    ),
+    radial-gradient(circle, var(--inner-circle) 2px, transparent 2px),
+    radial-gradient(circle, var(--inner-circle) 2px, transparent 2px),
+    radial-gradient(circle, var(--inner-circle) 2px, transparent 2px),
+    radial-gradient(circle, var(--inner-circle) 2px, transparent 2px),
+    var(--edge-left), var(--edge-right),
+    radial-gradient(circle, var(--violin-body) 55px, transparent 55px),
+    linear-gradient(var(--violin-body) 45px, transparent 45px);
+  /* violin left edge */
+  --edge-left-outline: linear-gradient(
+    var(--violin-body-outline) 35px,
+    transparent 35px
+  );
+  /* violin right edge */
+  --edge-right-outline: linear-gradient(
+    var(--violin-body-outline) 35px,
+    transparent 35px
+  );
+  /* violin body */
+  --violin-body-main-outline: radial-gradient(
+      circle,
+      var(--violin-body-outline) 66px,
+      transparent 66px
+    ),
+    radial-gradient(circle, var(--violin-body-outline) 55px, transparent 55px);
+  /* violin side strings */
+  --violin-strings: linear-gradient(
+      var(--violin-strings-gray) 100px,
+      transparent 1000px
+    ),
+    linear-gradient(var(--violin-strings-gray) 100px, transparent 1000px);
+
+  background-image: linear-gradient(
+      var(--scroll-light-red) 31px,
+      transparent 31px
+    ),
+    linear-gradient(var(--scroll-light-red) 31px, transparent 31px),
+    radial-gradient(circle, var(--scroll-light-red) 9px, transparent 9px),
+    radial-gradient(circle, var(--scroll-shadow-red) 11px, transparent 11px),
+    radial-gradient(circle, var(--violin-body) 14px, transparent 14px),
+    radial-gradient(ellipse, var(--scroll-shadow-red) 16px, transparent 16px),
+    linear-gradient(var(--tuning-peg-detail) 10px, transparent 10px),
+    linear-gradient(var(--tuning-peg-detail) 10px, transparent 10px),
+    linear-gradient(var(--tuning-peg-detail) 10px, transparent 10px),
+    linear-gradient(var(--tuning-peg-detail) 10px, transparent 10px),
+    radial-gradient(circle, var(--tuning-peg-circle) 5px, transparent 5px),
+    radial-gradient(circle, var(--tuning-peg-circle) 5px, transparent 5px),
+    radial-gradient(circle, var(--tuning-peg-circle) 5px, transparent 5px),
+    radial-gradient(circle, var(--tuning-peg-circle) 5px, transparent 5px),
+    linear-gradient(var(--tuning-peg-branch) 125px, transparent 100px),
+    linear-gradient(var(--tuning-peg-branch) 125px, transparent 100px),
+    linear-gradient(var(--tuning-peg-branch) 125px, transparent 100px),
+    linear-gradient(var(--tuning-peg-branch) 125px, transparent 100px),
+    linear-gradient(var(--violin-strings-gray) 100px, transparent 1000px),
+    linear-gradient(var(--violin-strings-gray) 100px, transparent 1000px),
+    linear-gradient(var(--fingerboard) 125px, transparent 100px),
+    linear-gradient(var(--violin-body) 125px, transparent 100px),
+    var(--violin-strings),
+    linear-gradient(var(--fingerboard) 800px, transparent 100px),
+    radial-gradient(ellipse, var(--bridge) 15px, transparent 17px),
+    radial-gradient(ellipse, var(--bridge-shadow) 15px, transparent 17px),
+    radial-gradient(circle, var(--violin-body) 1px, transparent 2px),
+    radial-gradient(circle, var(--violin-body) 1px, transparent 2px),
+    radial-gradient(circle, var(--violin-body) 1px, transparent 2px),
+    radial-gradient(circle, var(--violin-body) 1px, transparent 2px),
+    radial-gradient(
+      circle,
+      var(--fine-tuner-light) 0.5px,
+      var(--fine-tuner-dark) 4px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle,
+      var(--fine-tuner-light) 0.5px,
+      var(--fine-tuner-dark) 4px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle,
+      var(--fine-tuner-light) 0.5px,
+      var(--fine-tuner-dark) 4px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle,
+      var(--fine-tuner-light) 0.5px,
+      var(--fine-tuner-dark) 4px,
+      transparent 1px
+    ),
+    radial-gradient(circle, var(--tail-piece) 25px, transparent 25px),
+    linear-gradient(var(--tail-piece) 100px, transparent 100px),
+    var(--violin-body-main), var(--violin-body-main-outline);
+
+  background-size: 25px 2px, 2px 14px, 12px 22px, 24px 15px, 30px 8px, 34px 6px,
+    2px 7px, 2px 7px, 2px 7px, 2px 7px, 10px 10px, 10px 10px, 10px 10px,
+    10px 10px, 8px 5px, 8px 5px, 8px 5px, 8px 5px, 1.5px 259px, 1.5px 259px,
+    15px 25px, 25px 30px, /* violin strings */ 1.5px 255px, 1.5px 255px,
+    25px 175px, 30px 4px, 30px 12px, 7px 7px, 7px 7px, 7px 7px, 7px 7px, 8px 8px,
+    8px 8px, 8px 8px, 8px 8px, 56px 38px, 15px 57px, /* main body */ 320px 170px,
+    7px 7px, 7px 7px, 7px 7px, 7px 7px, 60px 48px, 42px 69px, 40px 70px,
+    60px 48px, 42px 70px, 40px 70px, 325px 159px, 85px 108px,
+    /* outline */ 345px 180px, 335px 159px;
+
+  background-position: 160px 70px, 171px 54px, 166px 52px, 160px 58px,
+    157px 60px, 155px 59px, 189px 73px, 189px 86px, 155px 92px, 155px 79px,
+    191px 85px, 191px 71px, 145px 78px, 145px 91px, 185px 74px, 185px 87px,
+    152px 80px, 152px 93px, 176px 76px, 168px 76px, 165px 75px, 160px 70px,
+    /* violin strings */ 183px 80px, 161px 80px, 160px 80px, 158px 280px,
+    158px 280px, 157.5px 332px, 165.5px 332px, 173.5px 332px, 181px 332px,
+    155px 340px, 164px 340px, 173px 340px, 182px 340px, 144px 328px, 164px 353px,
+    /* main body */ 11px 260px, 119px 240px, 125px 280px, 219px 242px,
+    212px 280px, 78px 215px, 101px 230px, 120px 220px, 207px 215px, 200px 230px,
+    187px 220px, 10px 140px, 129px 255px, /* outline */ -1px 255px, 5px 135px;
+}
+
+.violin-tranform-safari{
+  perspective: 5000px;
+  // transform-style: flat;
+  // z-index: 2;
+  transform: translate3d(55px,9px,204px) scale3d(0.2,0.2,1) skewY(12deg) skewX(-12deg) rotateY(180deg);
+}
+
+.violin-tranform{
+  perspective: 5000px;
+  // transform-style: flat;
+  // z-index: 2;
+  position: fixed;
+  transform: translate3d(140px,9px,0px) scale3d(0.6,0.6,1) skewY(12deg) skewX(-12deg) rotateY(180deg);
+}
+
+.violin::before,
+.violin::after {
+  content: "";
+  position: absolute;
+  --f-holes: #912f37;
+}
+
+.violin::after {
+  content: "~";
+  font-size: 65px;
+  height: 110px;
+  width: 69px;
+  left: 118px;
+  top: 253px;
+  color: var(--f-holes);
+  transform: scaleX(-1) rotate(74deg);
+}
+
+.violin::before {
+  content: "~";
+  font-size: 65px;
+  height: 110px;
+  width: 70px;
+  left: 158px;
+  top: 252.5px;
+  color: var(--f-holes);
+  transform: rotate(72deg);
+}
+
+
+.open-gift-box{
+  transform: translateY(-80px);
+  transition: ease-in-out 1s;
+}
+

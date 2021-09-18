@@ -1,10 +1,12 @@
 var browser = navigator.userAgent.toLowerCase().indexOf('safari'); 
-console.log(browser)
+
 var cake_click = 0;
 var envelope_click = 0;
+let gift_appear_status = false;
+let violin_appear_status = false;
 var myTimeout
 showPopUp(700)
-// console.log(ua.indexOf('safari'))
+// 
 
 $('body').on('click', '.door', function(e) {
     e.preventDefault();
@@ -44,12 +46,16 @@ $("#close_dialogue").click(function(){
 })
 
 $('#cake').click(function(){
+    
+    
     if(!$(this).hasClass('piece') && cake_click==0){
+        
+    
         $(this).addClass('piece')
         $('.one_piece').removeClass('d-none')
         $('.piece_plate').removeClass('d-none')
         cake_click+=1
-        console.log(envelope_click)
+        
         if(envelope_click==0){
             showPopUp(1500,"Stolun qarşısındakı məktuba oxşayır.<br> Bəlkə içində maraqlı nəsə yazılıb?<br> Aç və birlikdə oxuyaq ")
             return
@@ -57,24 +63,27 @@ $('#cake').click(function(){
 
     }
     else if($(this).hasClass('piece') && cake_click>0){
+        
+    
+        clearTimeout(myTimeout);
         showPopUp(200,"Hey axı sənə çoxlu şirniyat yemək olmaz.<br> Bu qədər bəsdir.")
         return
     }
 })
 
 $('body').on('click', '.chandelier', function() {
-    var el     = $(this),  
+    var el = $(this),  
     newone = el.clone(true);
           
     el.before(newone);
         
     el.hide();
-    console.log("." + el.attr("class"))
+    
   
 });
 
 $('.wrapper-envelope, .lid, .envelope, .letter').click(function(e){
-    clearTimeout(myTimeout);
+    gift_appear_status = true;
     e.preventDefault()
     envelope_click+=1
     $(".background-black").slideDown()
@@ -82,6 +91,8 @@ $('.wrapper-envelope, .lid, .envelope, .letter').click(function(e){
     if(browser !=-1){
         $("#living_room").fadeOut()
         $(".wrapper").fadeOut()
+        $("#container-gift").fadeOut()
+        $(".violin").fadeOut()
     }
 
 })
@@ -90,20 +101,54 @@ $("#close_envelope").click(function(){
     $(".background-black").slideUp()
     $("#notebook-paper").slideUp()
     $("#notebook-paper").slideUp()
-    $("#container-gift").fadeIn()
+    $("#container-gift").css({"display":"flex"})
     if(browser !=-1){
         $("#living_room").fadeIn()
         $(".wrapper").fadeIn()
+        if(gift_appear_status){
+            $("#container-gift").fadeIn()
+        }
+        if(violin_appear_status){
+            $("#container-gift").fadeIn()
+            $(".violin").fadeIn()
+        }
     }
+})
+
+
+$("#lid-gift, #box ").click(function(){
+    violin_appear_status = true;
+    $("#lid-gift").addClass('open-gift-box')
+    setTimeout(()=>{
+        $("#lid-gift").css({'display':'none'})
+        if(browser!=-1){
+            setTimeout(()=>{
+                $(".violin").addClass('violin-tranform-safari')
+                $(".violin").slideDown(1500)
+            },500)
+        }
+        else{
+            
+            setTimeout(()=>{
+                $(".violin").addClass('violin-tranform')
+                $(".violin").slideDown(1500)
+            },500)
+        }
+    },1000)
 })
 
 
 
 function showPopUp(time,text){
+    
+    
     myTimeout = setTimeout(function(){
         if(browser !=-1){
             $("#living_room").fadeOut()
             $(".wrapper").fadeOut()
+            $("#container-gift").fadeOut()
+            $(".violin").fadeOut()
+            
         }
         $(".background-black").slideDown()
         $(".bubble").fadeIn().css({'display':'flex'})
@@ -115,11 +160,21 @@ function showPopUp(time,text){
 }
 
 function closePopUp(){
+    
+    
+    
     $(".bubble").fadeOut()
     $(".box").slideUp()
     $(".background-black").slideUp()
     if(browser !=-1){
         $("#living_room").fadeIn()
         $(".wrapper").fadeIn()
+        if(gift_appear_status){
+            $("#container-gift").fadeIn()
+        }
+        if(violin_appear_status){
+            $("#container-gift").fadeIn()
+            $(".violin").fadeIn()
+        }
     }
 }
