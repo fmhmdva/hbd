@@ -1,4 +1,4 @@
-var browser = navigator.userAgent.toLowerCase().indexOf('safari'); 
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
 
 var cake_click = 0;
 var envelope_click = 0;
@@ -88,7 +88,7 @@ $('.wrapper-envelope, .lid, .envelope, .letter').click(function(e){
     envelope_click+=1
     $(".background-black").slideDown()
     $("#notebook-paper").slideDown()
-    if(browser !=-1){
+    if(isSafari){
         $("#living_room").fadeOut()
         $(".wrapper").fadeOut()
         $("#container-gift").fadeOut()
@@ -102,7 +102,7 @@ $("#close_envelope").click(function(){
     $("#notebook-paper").slideUp()
     $("#notebook-paper").slideUp()
     $("#container-gift").css({"display":"flex"})
-    if(browser !=-1){
+    if(isSafari){
         $("#living_room").fadeIn()
         $(".wrapper").fadeIn()
         if(gift_appear_status){
@@ -121,7 +121,7 @@ $("#lid-gift, #box ").click(function(){
     $("#lid-gift").addClass('open-gift-box')
     setTimeout(()=>{
         $("#lid-gift").css({'display':'none'})
-        if(browser!=-1){
+        if(isSafari){
             setTimeout(()=>{
                 $(".violin").addClass('violin-tranform-safari')
                 $(".violin").slideDown(1500)
@@ -143,7 +143,7 @@ function showPopUp(time,text){
     
     
     myTimeout = setTimeout(function(){
-        if(browser !=-1){
+        if(isSafari){
             $("#living_room").fadeOut()
             $(".wrapper").fadeOut()
             $("#container-gift").fadeOut()
@@ -166,7 +166,7 @@ function closePopUp(){
     $(".bubble").fadeOut()
     $(".box").slideUp()
     $(".background-black").slideUp()
-    if(browser !=-1){
+    if(isSafari){
         $("#living_room").fadeIn()
         $(".wrapper").fadeIn()
         if(gift_appear_status){
