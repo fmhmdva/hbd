@@ -3520,7 +3520,7 @@ html {
   margin: 0px auto;
   display: none;
   background-size: 100% 30px;
-  overflow: auto;
+  overflow: auto !important;
   position: absolute !important;
   padding-top: 150px;
   padding-left: 35px;
@@ -3591,6 +3591,7 @@ html {
   font-size: 3vmin;
   margin-top: 15px;
   cursor: pointer;
+  margin-bottom: 20px !important;
 }
 
 @media screen and (max-width: 900px) {
