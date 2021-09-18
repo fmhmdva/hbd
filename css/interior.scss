@@ -1536,7 +1536,7 @@ $dim: 150px;
 
 @media screen and (max-width: 500px) {
   .box {
-   transform: scale(0.3);
+   transform: scale(0.3) translate3d(-400px, 28px, 0);
   }
 }
 
