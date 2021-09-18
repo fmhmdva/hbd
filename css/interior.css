@@ -3521,7 +3521,7 @@ html {
   display: none;
   background-size: 100% 30px;
   overflow: auto;
-  position: absolute;
+  position: absolute !important;
   padding-top: 150px;
   padding-left: 35px;
   padding-right: 20px;
