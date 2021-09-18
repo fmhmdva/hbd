@@ -625,6 +625,7 @@ body
 
 
 .bubble {
+	z-index: 34;
 	position: absolute;
 	width: 55%;
 	height: 35%;
