@@ -3591,7 +3591,7 @@ html {
   font-size: 3vmin;
   margin-top: 15px;
   cursor: pointer;
-  margin-bottom: 20px !important;
+  margin-bottom: 150px !important;
 }
 
 @media screen and (max-width: 900px) {
