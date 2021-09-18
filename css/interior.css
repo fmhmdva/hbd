@@ -2668,8 +2668,8 @@ html {
 
 .candle {
   background-color: #7B020B;
-  width: 16px;
-  height: 50px;
+  width: 7px;
+  height: 24px;
   border-radius: 8px / 4px;
   top: -20px;
   left: 50%;
@@ -2682,8 +2682,8 @@ html {
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 8px;
+  width: 7px;
+  height: 6px;
   border-radius: 50%;
   background-color: #ad030f;
 }
@@ -2691,12 +2691,11 @@ html {
 .flame {
   position: absolute;
   background-color: orange;
-  width: 15px;
-  height: 35px;
+  width: 8px;
+  height: 17px;
   border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
-  top: -34px;
-  left: 50%;
-  margin-left: -7.5px;
+  top: -16px;
+  left: 0%;
   z-index: 10;
   -webkit-box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
           box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
